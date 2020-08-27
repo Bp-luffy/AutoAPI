@@ -1,19 +1,21 @@
-# coding=utf-8
 import redis, json
 from tools.dbtools.base.baseConfig import Config
 from tools.dbtools.base.sshServer import sshserver
 
-class redispool(Config,sshserver):
+
+class redispool(Config, sshserver):
     def __init__(self, section, sshconn=False):
         try:
             Config.__init__(self)
             conf = self.get_content(section)
             if sshconn:
-                sshserver.__init__(self,conf)
+                sshserver.__init__(self, conf)
                 self.start_server()
-                pool = redis.ConnectionPool(host='127.0.0.1', port=self.get_local_bind_port(),password=str(conf['password']), db=conf['db'])
+                pool = redis.ConnectionPool(host='127.0.0.1', port=self.get_local_bind_port(),
+                                            password=str(conf['password']), db=conf['db'])
             else:
-                pool = redis.ConnectionPool(host=conf['host'], port=conf['port'], password=str(conf['password']),db=conf['db'])
+                pool = redis.ConnectionPool(host=conf['host'], port=conf['port'], password=str(conf['password']),
+                                            db=conf['db'])
             self.r = redis.Redis(connection_pool=pool)
         except Exception as e:
             print("redis 连接失败，错误信息%s" % e)
@@ -69,10 +71,11 @@ class redispool(Config,sshserver):
         print('清空redis成功')
         return 0
 
+
 if __name__ == '__main__':
-    r = redispool('appstoreredis', sshconn=True)  # redisdb appstoreredis
+    r = redispool('redisdb')  # redisdb appstoreredis
     # r.clean_redis
     data = json.dumps({'project': 'india', 'total_size': '15.8 MB', "action": 1})
     r.hash_set('wait_task2', 1, data)
     # r.str_set('name','lily')
-    r.close_server()
+    # r.close_server()
