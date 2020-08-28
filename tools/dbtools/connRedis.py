@@ -4,10 +4,15 @@ from tools.dbtools.base.sshServer import sshserver
 
 
 class redispool(Config, sshserver):
-    def __init__(self, section, sshconn=False):
+    def __init__(self, section, sshconn=False, db=None):
+        self.db = db
         try:
             Config.__init__(self)
             conf = self.get_content(section)
+
+            if self.db is None:
+                self.db = conf['db']
+
             if sshconn:
                 sshserver.__init__(self, conf)
                 self.start_server()
@@ -15,8 +20,9 @@ class redispool(Config, sshserver):
                                             password=str(conf['password']), db=conf['db'])
             else:
                 pool = redis.ConnectionPool(host=conf['host'], port=conf['port'], password=str(conf['password']),
-                                            db=conf['db'])
+                                            db=self.db)
             self.r = redis.Redis(connection_pool=pool)
+
         except Exception as e:
             print("redis 连接失败，错误信息%s" % e)
 

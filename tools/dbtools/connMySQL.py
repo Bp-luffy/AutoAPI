@@ -7,7 +7,8 @@ from tools.dbtools.base.baseConfig import Config
 class mysqlpool(Config):
     __pool = None
 
-    def __init__(self, section):
+    def __init__(self, section, db=None):
+        self.db = db
         try:
             Config.__init__(self)
             config = self.get_content(section)
@@ -17,6 +18,9 @@ class mysqlpool(Config):
             print("mysql 连接错误： %s" % e)
 
     def __getConn(self, config):
+        if self.db is None:
+            self.db = config['db']
+
         if mysqlpool.__pool is None:
             __pool = PooledDB(creator=pymysql,
                               mincached=1,
@@ -25,7 +29,7 @@ class mysqlpool(Config):
                               port=config['port'],
                               user=config['user'],
                               password=str(config['password']),
-                              db=config['db'],
+                              db=self.db,
                               use_unicode=False,
                               charset=config['charset'],
                               cursorclass=DictCursor)
@@ -119,9 +123,9 @@ class mysqlpool(Config):
 
 
 if __name__ == '__main__':
-    pymysql = mysqlpool('mysqldb')
+    pymysql = mysqlpool('mysqldb', db='testforpl')
     sql = 'select * from sign_guest'
-    value = ['12312314', '342323', 234234, '2323234']
+    value = ['1231234', '342323', 234234, '2323234']
     sql1 = 'insert into test1(domain ,id,ip,t) values (%s,%s,%s,%s)'
     # query(sql,type='many',num=2)
     print(pymysql.insert(sql1, param=value))
