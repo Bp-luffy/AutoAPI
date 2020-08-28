@@ -1,5 +1,5 @@
 #coding=utf-8
-from tools.dbtools.base.baseConfig import Config
+from db.base.baseConfig import Config
 from sshtunnel import SSHTunnelForwarder
 from pymongo import MongoClient
 import pandas,json,time

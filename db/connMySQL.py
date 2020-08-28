@@ -1,7 +1,7 @@
 import pymysql
 from pymysql.cursors import DictCursor
 from DBUtils.PooledDB import PooledDB
-from tools.dbtools.base.baseConfig import Config
+from db.base.baseConfig import Config
 
 
 class mysqlpool(Config):

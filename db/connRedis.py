@@ -1,6 +1,6 @@
 import redis, json
-from tools.dbtools.base.baseConfig import Config
-from tools.dbtools.base.sshServer import sshserver
+from db.base.baseConfig import Config
+from db import sshserver
 
 
 class redispool(Config, sshserver):
