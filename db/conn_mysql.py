@@ -4,7 +4,7 @@ from DBUtils.PooledDB import PooledDB
 from db.base.baseConfig import Config
 
 
-class mysqlpool(Config):
+class MYSQLpool(Config):
     __pool = None
 
     def __init__(self, section, db=None):
@@ -21,7 +21,7 @@ class mysqlpool(Config):
         if self.db is None:
             self.db = config['db']
 
-        if mysqlpool.__pool is None:
+        if MYSQLpool.__pool is None:
             __pool = PooledDB(creator=pymysql,
                               mincached=1,
                               maxcached=20,
@@ -123,7 +123,8 @@ class mysqlpool(Config):
 
 
 if __name__ == '__main__':
-    pymysql = mysqlpool('mysqldb', db='testforpl')
+    # pymysql = MYSQLpool('mysqldb', db='testforpl')
+    pymysql = MYSQLpool('qtsdb')
     sql = 'select * from sign_guest'
     value = ['1231234', '342323', 234234, '2323234']
     sql1 = 'insert into test1(domain ,id,ip,t) values (%s,%s,%s,%s)'

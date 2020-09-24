@@ -1,6 +1,6 @@
 import redis, json
 from db.base.baseConfig import Config
-from db import sshserver
+from db.base.sshServer import sshserver
 
 
 class redispool(Config, sshserver):
@@ -69,6 +69,10 @@ class redispool(Config, sshserver):
             print('删除失败，该key不存在')
             return 0
 
+    def key_is_exist(self,k):
+        res = self.r.exists(k)
+        return res
+
     @property  # 属性方法
     # 使用的时候和变量一个用法就好比实例，A=MyRedis(),A.clean_redis使用，
     # 如果不加这个@property，使用时A=MyRedis(),A.cleam_redis（）后面需要加这个函数的括号
@@ -81,7 +85,9 @@ class redispool(Config, sshserver):
 if __name__ == '__main__':
     r = redispool('redisdb')  # redisdb appstoreredis
     # r.clean_redis
-    data = json.dumps({'project': 'india', 'total_size': '15.8 MB', "action": 1})
-    r.hash_set('wait_task2', 1, data)
+    # data = json.dumps({'project': 'india', 'total_size': '15.8 MB', "action": 1})
+    key = '109010411021'
+    # r.hash_set('wait_task2', 1, data)
+    print(r.str_get(key))
     # r.str_set('name','lily')
     # r.close_server()
