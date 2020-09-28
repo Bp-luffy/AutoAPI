@@ -69,7 +69,7 @@ class redispool(Config, sshserver):
             print('删除失败，该key不存在')
             return 0
 
-    def key_is_exist(self,k):
+    def key_is_exist(self, k):
         res = self.r.exists(k)
         return res
 

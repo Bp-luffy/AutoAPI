@@ -1,6 +1,5 @@
-# coding=utf-8
 from db.base.baseConfig import Config
-from db import sshserver
+from db.base.sshServer import sshserver
 from pymongo import MongoClient
 import pandas, json, time
 

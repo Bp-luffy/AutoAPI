@@ -52,8 +52,8 @@ class KafkaPython:
                 if self.userid:
                     if str(data['eventType']) in self.eventType and data['user_id'] == self.userid:
                         res = self.get_dic(data)
-                        print(res)
-                        # print(res, flush=True)
+                        # print(res)
+                        print(res, flush=True)
                         time.sleep(0.5)
                 else:
                     if str(data['eventType']) in self.eventType and data['device_id'] == self.deviceid:

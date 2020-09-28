@@ -1,5 +1,0 @@
-[2019-11-06 21:25:10] [DEBUG]-firsttable.py(line:24) -          time                date                   class        phone   code                  account  status     level
-0  1572796774 2019-11-03 23:59:34  vApp\lib\VerifyAccount  16532940424   True  tqqpz5419722091@163.com       1       卡商3
-1  1572796749 2019-11-03 23:59:09  vApp\lib\VerifyAccount  16532940504  False           qte5e2@126.com       1       卡商3
-2  1572796753 2019-11-03 23:59:13  vApp\lib\VerifyAccount  16532942046  False           pro667@126.com       1       卡商3
-3  1572796836 2019-11-04 00:00:36           vApp\lib\Task  17111696057   True           l3f1jl@126.com       0  1-100卡槽0
